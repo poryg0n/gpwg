@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ post.name }}
+{% endblock %}
+
+{% block content%}
+
+{% if user.is_superuser %}
+<ul>
+{% for post in object_list %}
+<li><a href="{% url 'category' post.name %}">
+	{{ post.name }} </a> 
+	- <small><a href={% url 'update-category' post.pk %}>Editer</a></small> 
+	{% comment %}
+	- <small><a href={% url 'delete-category' post.pk %}>Effacer</a></small></li>
+	{% endcomment %}
+{% endfor %}
+</ul>
+{% else %}
+       <h2>Vous n'&ecirc;tes pas autoris&eacute;(e) &agrave ex&eacute;cuter cette action.</h2>
+{% endif %}
+
+
+{% endblock %}
